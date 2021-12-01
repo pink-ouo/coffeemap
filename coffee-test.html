@@ -1,112 +1,221 @@
-
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>coffee text</title>
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
-    <script src="https://cdn.maptiler.com/mapbox-gl-js/v1.13.2/mapbox-gl.js"></script>
-    <script src="https://cdn.maptiler.com/mapbox-gl-leaflet/latest/leaflet-mapbox-gl.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css" />
-    <link rel="stylesheet" href="https://cdn.maptiler.com/mapbox-gl-js/v1.13.2/mapbox-gl.css" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <style>
-      #map {height: 600px; width: 700px;}
-    </style>
-  </head>
-  <body>
-    <button type="button" class="btn btn-info"id="btn_request">咖啡地圖</button>
-<div class=" d-flex">
-    <div id="map">
-      <a href="https://www.maptiler.com" style="position:absolute;left:10px;bottom:10px;z-index:999;"><img src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo"></a>
-    </div>
+
+<style>
+
+.mainDiv{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+}
+.mapDiv{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+}
+#map {
+    height: 100%;
+}
+.oooDIV{
+    width: 50%;
+    height: 100vh;
+}
+table, thead, th, tbody, tr, td {
+    border: 1px solid;
+}
+.infomation{
+    width: 50%;
+    height: 100vh;
     
-    <table class="table mx-3">
-      <thead>
-          <tr>
-              <th>name</th>
-              <th>address</th>
-              <th>url</th>
-              <th>socket</th>
-              <th>latitude</th>
-              <th>longitude</th>
-          </tr>
-      </thead>
-      <tbody></tbody>
-  </table>
+}
+
+.col-sm-6{
+    padding: 0;
+}      
+
+.shopImg{
+    width: 33%;
+    height: auto;
+    background-color: #aaf;
+    margin: 1rem;
+}
+.shop{
+    width: 100%;
+    display:flex;
+    padding: 1rem;
+}
+.shopInfo{
+    width: 66%;
+    height: auto;
+    margin: 1rem;
+}
+        
+</style>
+</head>
+<body>
+
+<!-- <button type="button" class="btn btn-info"id="btn_request">咖啡地圖</button> -->
+
+<div class="mainDiv">
+    <div class="oooDIV"></div>
+    <div class="mapDiv col-sm-6">
+         <div id="map">
+            <a href="https://www.maptiler.com" style="position:absolute;left:10px;bottom:10px;z-index:999;"><img src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo"></a>
+        </div>
+    </div>            
+    <div class="infomation col-sm-6">
+        <div class="shopCard">
+            <div class="shop">
+                <div class="shopImg">
+        
+                </div>
+                <div class="shopInfo">
+                    <p class="shopName">咖啡瑪榭忠孝店</p>
+                    <p class="shopStar">★★★★☆</p>
+                    <p class="shopCity">臺北市 ⋅ 中山區</p>
+                    <p class="shopAddress">台北市民生東路二段127巷21號 </p>
+                    <p class="shopOpentime">休息中 . 於上午9:30營業</p> 
+                </div>
+            </div>
+            <div class="shop">
+                <div class="shopImg">
+        
+                </div>
+                <div class="shopInfo">
+                    <p class="shopName">咖啡瑪榭忠孝店</p>
+                    <p class="shopStar">★★★★☆</p>
+                    <p class="shopCity">臺北市 ⋅ 中山區</p>
+                    <p class="shopAddress">台北市民生東路二段127巷21號 </p>
+                    <p class="shopOpentime">休息中 . 於上午9:30營業</p> 
+                </div>
+            </div>
+            <div class="shop">
+                <div class="shopImg">
+        
+                </div>
+                <div class="shopInfo">
+                    <p class="shopName">咖啡瑪榭忠孝店</p>
+                    <p class="shopStar">★★★★☆</p>
+                    <p class="shopCity">臺北市 ⋅ 中山區</p>
+                    <p class="shopAddress">台北市民生東路二段127巷21號 </p>
+                    <p class="shopOpentime">休息中 . 於上午9:30營業</p> 
+                </div>
+            </div>
+            <div class="shop">
+                <div class="shopImg">
+        
+                </div>
+                <div class="shopInfo">
+                    <p class="shopName">咖啡瑪榭忠孝店</p>
+                    <p class="shopStar">★★★★☆</p>
+                    <p class="shopCity">臺北市 ⋅ 中山區</p>
+                    <p class="shopAddress">台北市民生東路二段127巷21號 </p>
+                    <p class="shopOpentime">休息中 . 於上午9:30營業</p> 
+                </div>
+            </div>
+            <div class="shop">
+                <div class="shopImg">
+        
+                </div>
+                <div class="shopInfo">
+                    <p class="shopName">咖啡瑪榭忠孝店</p>
+                    <p class="shopStar">★★★★☆</p>
+                    <p class="shopCity">臺北市 ⋅ 中山區</p>
+                    <p class="shopAddress">台北市民生東路二段127巷21號 </p>
+                    <p class="shopOpentime">休息中 . 於上午9:30營業</p> 
+                </div>
+            </div>
+            <div class="shop">
+                <div class="shopImg">
+        
+                </div>
+                <div class="shopInfo">
+                    <p class="shopName">咖啡瑪榭忠孝店</p>
+                    <p class="shopStar">★★★★☆</p>
+                    <p class="shopCity">臺北市 ⋅ 中山區</p>
+                    <p class="shopAddress">台北市民生東路二段127巷21號 </p>
+                    <p class="shopOpentime">休息中 . 於上午9:30營業</p> 
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
 </div>
 
-<script>
-  let map = L.map('map').setView([25.08052, 121.603637], 13);
-  let gl = L.mapboxGL({
-    attribution: "\u003ca href=\"https://carto.com/\" target=\"_blank\"\u003e\u0026copy; CARTO\u003c/a\u003e \u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e",
-    style: 'https://api.maptiler.com/maps/voyager/style.json?key=RkcAApneeJ7U4qKSOVao'
-  }).addTo(map);
-let myIcon = L.icon({
-  iconUrl:'coffee.png',
-  iconSize:[20,20],
-})
-// let maker = L.makerEx(L.latLng(-37.82,175.24),{icon:myIcon}).addTo(map);
-//   let CartoDB_Positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-// 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-// 	subdomains: 'abcd',
-// 	maxZoom: 20
-// });
+<!-- <table class="table">
+<thead>
+    <tr>
+        <th>name</th>
+        <th>address</th>
+        <th>url</th>
+        <th>socket</th>
+        <th>latitude</th>
+        <th>longitude</th>
+    </tr>
+</thead>
+<tbody></tbody>
+</table>     -->
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+    <script>
+    let map = L.map('map').setView([25.031211, 121.510191], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    let myIcon = L.icon({
+    iconUrl:'coffee.png',
+    iconSize:[20,20],
+    })
+    L.maker([25.031211, 121.510191],{icon:myIcon}).addTo(map);
 
 
-    //   // *** 放置標記 + 客製標記
-    // const customIcon = L.icon({
-    //   iconUrl: 'https://cdn4.iconfinder.com/data/icons/universal-7/614/17_-_Location-256.png',
-    //   iconSize: [42, 42],
-    // });
-    // const marker = L.marker(center, {
-    //   icon: customIcon,
-    //   title: '跟 <a> 的 title 一樣', // 跟 <a> 的 title 一樣
-    //   opacity: 1.0
-    // }).addTo(map);
+    let layerGroup = null;
+    let arrLayers = [];
 
-    // // 放置 markers
-    // const btnPutMarkers = document.getElementById('put-markers');
-    // btnPutMarkers.addEventListener('click', e => {
-    //   e.preventDefault();
-    //   for(let i = 0; i < 10; i++) {
-    //     let lng_first = center[1] + (0.0005 * i);
-    //     let location = [ center[0], lng_first ];
-    //     let marker = L.marker(location, { icon: customIcon }).addTo(map);
-    //   }
-    //   e.target.classList.add('disabled')
-    // })
+    document.querySelector('button#btn_request').addEventListener('click', function(event){
+        fetch('https://darreninfo.cc/web_api_coffee.php', {
+            method: 'GET'
+        })
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(arr){
+            let tbody = document.querySelector('table > tbody');
+            for(let o of arr){
+                if(o['socket']!== 'yes') continue;
+                let tr = document.createElement('tr');
+                tr.innerHTML = `<td>${o['name']}</td>
+                                <td>${o['address']}</td>
+                                <td><a href="${o['url']}" target="_blank">連結</a></td>
+                                <td>${o['socket']}</td>
+                                <td>${o['latitude']}</td>
+                                <td>${o['longitude']}</td>`;
+                tbody.appendChild(tr);
 
-</script>
+                let marker = L.marker([o['latitude'], o['longitude']]).bindPopup(o['name']);
 
-<script>
-document.querySelector('button#btn_request').addEventListener('click', function(event){
-  fetch('https://darreninfo.cc/web_api_coffee.php',{
-          method: "GET"
-  }).then(function(response){ 
-    return response.json();
-  }).then(function(arr){
-    let tbody = document.querySelector('table > tbody');
-    for(let o of arr){
-    let tr = document.createElement("tr");
-    tr.innerHTML = `<td>${o['name']}</td>
-                    <td>${o['address']}</td>
-                    <td><a href="${o['url']}" target="_blank">連結</a></td>
-                    <td>${o['socket']}</td>
-                    <td>${o['latitude']}</td>
-                    <td>${o['longitude']}</td>`;
-    tbody.appendChild(tr);
+                arrLayers.push(marker);
+            }
 
-    L.marker([o['latitude'],o['longitude']]).addTo(map)
-    .bindPopup(o['name'])
-    .openPopup();
-    }
-  });
-});
-</script>
-  </body>
+            layerGroup = L.layerGroup(arrLayers);
+            layerGroup.addTo(map);
+        });
+    });
+    </script>
+    
+</body>
 </html>
