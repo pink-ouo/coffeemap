@@ -72,6 +72,12 @@
             height: auto;
             margin: 1rem;
         }
+        /* .shopmm{
+            width: 500px;
+            height: 500px;
+            background-color: #afa;
+            color: black;
+        } */
     </style>
 </head>
 
@@ -87,21 +93,22 @@
                         src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo"></a>
             </div>
         </div>
-        <div class="infomation col-sm-6">
+        <div class="shopmm"></div>
+        <!-- <div class="infomation col-sm-6">
             <div class="shopCard">
                 <div class="shop">
-                    <!-- <div class="shopImg">
-
-                </div> -->
+                    <div class="shopImg">
+                    </div>
                     <div class="shopInfo">
-                        <!-- <p>name</p>
+                    <p>name</p>
                     <p>address</p>
                     <p>url</p>
-                    <p>open_time </p> -->
+                    <p>open_time </p>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
+    </div>
 
         <!-- <div class="shop">
     <div class="shopImg">
@@ -141,49 +148,14 @@
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
-            // let myIcon = L.icon({
-            // iconUrl:'coffee.png',
-            // iconSize:[20,20],
-            // })
-            // L.maker([25.031211, 121.510191],{icon:myIcon}).addTo(map);
-
-            // var myIcon = L.icon({
-            //     iconUrl: 'coffee.png',
-            //     iconSize: [40, 60],
-            //     iconAnchor: [20, 60],
-            //     shadowAnchor: [20, 40],
-            //     popupAnchor: [0, -53]
-            // });
-
-            // var marker = L.marker([35.10418, -106.62987],
-            //     { icon: myIcon })
-            //     .addTo(map)
-            //     .bindPopup(o['name');
-
-            // const center = ['latitude', 'longitude'];
-            // const marker = L.marker(center, {
-            // title: '跟 <a> 的 title 一樣', // 跟 <a> 的 title 一樣
-            // opacity: 1.0
-            // }).addTo(map);
-
-            // L.marker([51.5, -0.09], {
-            //     icon: greenIcon}).addTo(map)
-
-
-            // let marker = L.marker([o['latitude'], o['longitude']])
-            // .bindPopup(o['name'])
-            // .openPopup();
-
-            // marker.addEventListener('click',function(event){
-            //     console.log(marker);
-            // })
-
-            // arrLayers.push(marker);
+            let myIcon = L.icon({
+            iconUrl:'coffee.png',
+            iconSize:[10,10],
+            })
 
             let layerGroup = null;
             let arrLayers = [];
             document.addEventListener("DOMContentLoaded", function (event) {
-
                 fetch('https://darreninfo.cc/web_api_coffee.php', {
                     method: 'GET'
                 })
@@ -193,18 +165,18 @@
                     .then(function (arr) {
                         let shopInfo = document.querySelector('shop > shopInfo');
                         for (let o of arr) {
-                            if (o['socket'] !== 'yes') continue;
-                            // let shopInfo = document.createElement('shopInfo');
-                            // shopInfo.innerHTML = `<p>${o['name']}</p>
-                            //                     <p>${o['address']}</p>
-                            //                     <p><a href="${o['url']}" target="_blank">連結</a></p>
-                            //                     <p>${o['open_time']}</p>`;
-                            //                 shop.appendChild(shopInfo);
-                            let marker = L.marker([o['latitude'], o['longitude']])
+                            let marker = L.marker([o['latitude'], o['longitude']],{icon:myIcon})
                                 .bindPopup(o['name'])
-                                .openPopup();
+                                .openPopup()
                             marker.addEventListener('click', function (event) {
                                 console.log(o)
+                                let p = document.createElement("p");
+                                shopmm.innerHTML = `<p>${o['name']}</p>
+                                                    <p>${o['address']}</p>
+                                                    <p><a href="${o['url']}" target="_blank">連結</a></p>
+                                                    <p>${o['open_time']}</p>`;
+                                shopmm.appendChild(p);
+                                console.log(p)
                             });
                             arrLayers.push(marker)
                         }
