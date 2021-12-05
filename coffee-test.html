@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>minori-coffee-map</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin="" />
@@ -94,23 +94,23 @@
             </div>
         </div>
         <div class="shopmm"></div>
-        <!-- <div class="infomation col-sm-6">
+        <div class="infomation col-sm-6">
             <div class="shopCard">
                 <div class="shop">
                     <div class="shopImg">
                     </div>
                     <div class="shopInfo">
-                    <p>name</p>
+                    <!-- <p>name</p>
                     <p>address</p>
                     <p>url</p>
-                    <p>open_time </p>
+                    <p>open_time </p> -->
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
     </div>
 
-        <!-- <div class="shop">
+<!-- <div class="shop">
     <div class="shopImg">
 
     </div>
@@ -169,14 +169,13 @@
                                 .bindPopup(o['name'])
                                 .openPopup()
                             marker.addEventListener('click', function (event) {
-                                console.log(o)
-                                let p = document.createElement("p");
-                                shopmm.innerHTML = `<p>${o['name']}</p>
+                                let div = document.querySelector("div.shopInfo")
+                                // let p = document.createElement("p");
+                                div.innerHTML = `<p>${o['name']}</p>
                                                     <p>${o['address']}</p>
                                                     <p><a href="${o['url']}" target="_blank">連結</a></p>
                                                     <p>${o['open_time']}</p>`;
-                                shopmm.appendChild(p);
-                                console.log(p)
+                                // shopmm.appendChild(p);
                             });
                             arrLayers.push(marker)
                         }
