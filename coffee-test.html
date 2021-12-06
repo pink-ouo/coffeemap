@@ -47,7 +47,7 @@
         .infomation {
             width: 50%;
             height: 100vh;
-
+            background: url(./coffee-bg.jpg)center center/150% no-repeat;
         }
 
         .col-sm-6 {
@@ -56,15 +56,16 @@
 
         .shopImg {
             width: 33%;
-            height: auto;
-            background-color: #aaf;
+            background: no-repeat center/100% url("./coffee.jpg");
             margin: 1rem;
         }
 
         .shop {
             width: 100%;
+            height: auto;
             display: flex;
             padding: 1rem;
+            color: white;
         }
 
         .shopInfo {
@@ -72,18 +73,11 @@
             height: auto;
             margin: 1rem;
         }
-        /* .shopmm{
-            width: 500px;
-            height: 500px;
-            background-color: #afa;
-            color: black;
-        } */
+
     </style>
 </head>
 
 <body>
-
-    <!-- <button type="button" class="btn btn-info"id="btn_request">咖啡地圖</button> -->
 
     <div class="mainDiv">
         <div class="oooDIV"></div>
@@ -100,7 +94,7 @@
                     <div class="shopImg">
                     </div>
                     <div class="shopInfo">
-                    <!-- <p>name</p>
+                        <!-- <p>name</p>
                     <p>address</p>
                     <p>url</p>
                     <p>open_time </p> -->
@@ -110,80 +104,62 @@
         </div>
     </div>
 
-<!-- <div class="shop">
-    <div class="shopImg">
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <script>
+        var CartoDB_Positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 20
+        }).addTo(map);
+    </script>
 
-    </div>
-    <div class="shopInfo">
-        <p class="shopName">咖啡瑪榭忠孝店</p>
-        <p class="shopStar">★★★★☆</p>
-        <p class="shopCity">臺北市 ⋅ 中山區</p>
-        <p class="shopAddress">台北市民生東路二段127巷21號 </p>
-        <p class="shopOpentime">休息中 . 於上午9:30營業</p> 
-    </div>
-</div> -->
+    <script>
+        let map = L.map('map').setView([25.032816, 121.543592], 17);
 
-        <!-- <table class="table">
-        <thead>
-            <tr>
-                <th>name</th>
-                <th>address</th>
-                <th>url</th>
-                <th>socket</th>
-                <th>latitude</th>
-                <th>longitude</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>     -->
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 20
+        }).addTo(map);
 
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-            crossorigin=""></script>
+        let myIcon = L.icon({
+            iconUrl: 'coffee_icon_2.png',
+            iconSize: [40, 40],
+        })
 
-        <script>
-            let map = L.map('map').setView([25.031211, 121.510191], 13);
-
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
-
-            let myIcon = L.icon({
-            iconUrl:'coffee.png',
-            iconSize:[10,10],
+        let layerGroup = null;
+        let arrLayers = [];
+        document.addEventListener("DOMContentLoaded", function (event) {
+            fetch('http://localhost/web_api_coffee.php', {
+                method: 'GET'
             })
-
-            let layerGroup = null;
-            let arrLayers = [];
-            document.addEventListener("DOMContentLoaded", function (event) {
-                fetch('https://darreninfo.cc/web_api_coffee.php', {
-                    method: 'GET'
+                .then(function (response) {
+                    return response.json();
                 })
-                    .then(function (response) {
-                        return response.json();
-                    })
-                    .then(function (arr) {
-                        let shopInfo = document.querySelector('shop > shopInfo');
-                        for (let o of arr) {
-                            let marker = L.marker([o['latitude'], o['longitude']],{icon:myIcon})
-                                .bindPopup(o['name'])
-                                .openPopup()
-                            marker.addEventListener('click', function (event) {
-                                let div = document.querySelector("div.shopInfo")
-                                // let p = document.createElement("p");
-                                div.innerHTML = `<p>${o['name']}</p>
+                .then(function (arr) {
+                    let shopInfo = document.querySelector('shop > shopInfo');
+                    for (let o of arr) {
+                        let marker = L.marker([o['latitude'], o['longitude']], { icon: myIcon })
+                            .bindPopup(o['name'])
+                            .openPopup()
+                        marker.addEventListener('click', function (event) {
+                            let div = document.querySelector("div.shopInfo")
+                            // let p = document.createElement("p");
+                            div.innerHTML = `<p>${o['name']}</p>
                                                     <p>${o['address']}</p>
                                                     <p><a href="${o['url']}" target="_blank">連結</a></p>
                                                     <p>${o['open_time']}</p>`;
-                                // shopmm.appendChild(p);
-                            });
-                            arrLayers.push(marker)
-                        }
-                        layerGroup = L.layerGroup(arrLayers);
-                        layerGroup.addTo(map);
-                    });
-            });
-        </script>
+                            // shopmm.appendChild(p);
+                        });
+                        arrLayers.push(marker)
+                    }
+                    layerGroup = L.layerGroup(arrLayers);
+                    layerGroup.addTo(map);
+                });
+        });
+    </script>
 
 </body>
 
